@@ -1,0 +1,12 @@
+{
+  "name": "playwright_zaklady",
+  "scripts": {
+    "allTests": "playwright test"
+  },
+  "keywords": [],
+  "author": "Kankys",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.34.3"
+  }
+}

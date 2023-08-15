@@ -1,0 +1,37 @@
+name: Zive Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        path: 'Playwright_GH_TS'
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 16
+    - name: Install dependencies
+      run: |
+       cd Playwright_GH_TS/zive
+        npm ci
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Run Playwright tests
+      run: |
+        cd Playwright_GH_TS/zive
+        npx playwright test
+    - uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: playwright-report
+        path: cd Playwright_GH_TS/zive/playwright-report/
+        retention-days: 90
+
